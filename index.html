@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India Move Checklist</title>
+<style>
+  /* Dark theme */
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+  }
+
+  body.light {
+    background-color: #f4f4f4;
+    color: #121212;
+  }
+
+  header {
+    background-color: #1f1f1f;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffcc00;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  body.light header {
+    background-color: #ddd;
+    color: #333;
+  }
+
+  header button {
+    background-color: #ffcc00;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  details {
+    margin-bottom: 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #1b1b1b;
+    padding: 0.5rem 1rem;
+  }
+
+  body.light details {
+    background-color: #eee;
+    border-color: #ccc;
+  }
+
+  summary {
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 600;
+    outline: none;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 1rem;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 0.75rem;
+    accent-color: #ffcc00;
+    transform: scale(1.2);
+  }
+
+  li input[type="text"] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed #888;
+    color: inherit;
+    font-size: 1rem;
+  }
+
+  li input[type="text"]:focus {
+    outline: none;
+    border-bottom-color: #ffcc00;
+  }
+
+  button.task-btn {
+    margin-left: 0.5rem;
+    background: #ff5555;
+    border: none;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .progress-container {
+    margin-bottom: 1rem;
+  }
+
+  .progress-bar {
+    width: 100%;
+    background-color: #333;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 16px;
+    margin-top: 0.3rem;
+  }
+
+  .progress-bar div {
+    height: 100%;
+    background-color: #ffcc00;
+    width: 0%;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .controls button {
+    margin: 0.3rem 0;
+    background-color: #ffcc00;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      font-size: 1.3rem;
+    }
+    summary {
+      font-size: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  India Move Checklist
+  <button id="themeToggle">Light Mode</button>
+</header>
+
+<main>
+  <div class="controls">
+    <button id="resetBtn">Reset All</button>
+    <button id="exportBtn">Export Checklist</button>
+    <button id="addTaskBtn">Add Task</button>
+  </div>
+
+  <div class="progress-container">
+    Overall Progress:
+    <div class="progress-bar"><div id="overallProgress"></div></div>
+  </div>
+
+  <!-- Checklist Sections -->
+  <details open>
+    <summary>Travel Documents</summary>
+    <ul id="Travel Documents">
+      <li><input type="checkbox" id="passport">Passport (valid 6+ months)</li>
+      <li><input type="checkbox" id="visa">Indian Visa / OCI</li>
+      <li><input type="checkbox" id="license">Driver’s License</li>
+      <li><input type="checkbox" id="tickets">Airline tickets / e-ticket</li>
+      <li><input type="checkbox" id="insurance">Travel insurance</li>
+      <li><input type="checkbox" id="vaccination">Vaccination certificates</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Housing & Utilities</summary>
+    <ul id="Housing & Utilities">
+      <li><input type="checkbox" id="notice">Give notice to landlord / end lease</li>
+      <li><input type="checkbox" id="cancelUtilities">Cancel utilities</li>
+      <li><input type="checkbox" id="deposit">Get security deposit back</li>
+      <li><input type="checkbox" id="homeInsurance">Close renter’s/home insurance</li>
+      <li><input type="checkbox" id="mailForward">Forward mail</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Banking & Finances</summary>
+    <ul id="Banking & Finances">
+      <li><input type="checkbox" id="notifyBanks">Notify banks of move</li>
+      <li><input type="checkbox" id="bankAccounts">Close / maintain US accounts</li>
+      <li><input type="checkbox" id="cash">Withdraw cash / plan transfers</li>
+      <li><input type="checkbox" id="creditCards">Update / cancel credit cards</li>
+      <li><input type="checkbox" id="investments">Close / update investments</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Health & Medical</summary>
+    <ul id="Health & Medical">
+      <li><input type="checkbox" id="doctor">Schedule doctor/dentist visits</li>
+      <li><input type="checkbox" id="records">Obtain medical records</li>
+      <li><input type="checkbox" id="medications">Prescription medications</li>
+      <li><input type="checkbox" id="vaccinations">Vaccinations if required</li>
+      <li><input type="checkbox" id="healthIndia">Health insurance in India</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Technology & Communication</summary>
+    <ul id="Technology & Communication">
+      <li><input type="checkbox" id="backup">Backup computer, phone, and data</li>
+      <li><input type="checkbox" id="voltage">Check electronics voltage compatibility</li>
+      <li><input type="checkbox" id="unlockPhone">Unlock phone for Indian SIM</li>
+      <li><input type="checkbox" id="cancelMobile">Cancel US mobile plan</li>
+      <li><input type="checkbox" id="exportData">Export cloud/email data</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Personal Belongings & Shipping</summary>
+    <ul id="Personal Belongings & Shipping">
+      <li><input type="checkbox" id="sortBelongings">Sort belongings: keep/donate/sell/ship</li>
+      <li><input type="checkbox" id="documents">Secure important documents</li>
+      <li><input type="checkbox" id="luggage">Plan luggage & shipping</li>
+      <li><input type="checkbox" id="labelBoxes">Label boxes clearly</li>
+      <li><input type="checkbox" id="petRelocation">Arrange pet relocation if needed</li>
+    </ul>
+  </details>
+</main>
+
+<script>
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const overallProgress = document.getElementById('overallProgress');
+const themeToggle = document.getElementById('themeToggle');
+const resetBtn = document.getElementById('resetBtn');
+const exportBtn = document.getElementById('exportBtn');
+const addTaskBtn = document.getElementById('addTaskBtn');
+
+// Load checkbox state
+checkboxes.forEach(box => {
+  const saved = localStorage.getItem(box.id);
+  if (saved === 'true') box.checked = true;
+  box.addEventListener('change', () => {
+    localStorage.setItem(box.id, box.checked);
+    updateProgress();
+  });
+});
+
+function updateProgress() {
+  const total = checkboxes.length;
+  const checked = Array.from(checkboxes).filter(c => c.checked).length;
+  overallProgress.style.width = ((checked/total)*100) + '%';
+}
+
+// Theme toggle
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  themeToggle.textContent = document.body.classList.contains('light') ? 'Dark Mode' : 'Light Mode';
+});
+
+// Reset all
+resetBtn.addEventListener('click', () => {
+  if(confirm('Reset all tasks?')) {
+    checkboxes.forEach(c => {
+      c.checked = false;
+      localStorage.setItem(c.id, false);
+    });
+    updateProgress();
+  }
+});
+
+// Export checklist
+exportBtn.addEventListener('click', () => {
+  const data = {};
+  checkboxes.forEach(c => {
+    data[c.id] = { text: c.parentElement.textContent.trim(), done: c.checked };
+  });
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'checklist.json';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+// Add new task (simple)
+addTaskBtn.addEventListener('click', () => {
+  const sectionName = prompt('Enter section name to add task (exact match):');
+  const taskText = prompt('Enter task text:');
+  if(sectionName && taskText){
+    const section = document.getElementById(sectionName);
+    if(section){
+      const id = 'task_' + Date.now();
+      const li = document.createElement('li');
+      li.innerHTML = `<input type="checkbox" id="${id}"><input type="text" value="${taskText}"><button class="task-btn">Delete</button>`;
+      section.appendChild(li);
+
+      const box = li.querySelector('input[type="checkbox"]');
+      box.addEventListener('change', () => {
+        localStorage.setItem(box.id, box.checked);
+        updateProgress();
+      });
+
+      li.querySelector('.task-btn').addEventListener('click', () => {
+        localStorage.removeItem(box.id);
+        li.remove();
+        updateProgress();
+      });
+    } else {
+      alert('Section not found!');
+    }
+  }
+  updateProgress();
+});
+
+// Initial progress
+updateProgress();
+</script>
+
+</body>
+</html>
